@@ -51,5 +51,25 @@ go into the target directory and run make:
 cd EP4CE6E22C8/
 make
 ```
+## build times
+this is only a small comparison, it is not very meaningful and varies depending on the system and project
+```
+time make
+```
 
-
+| Part | Toolchain | duration(user) | duration(system) | files | bitstream |
+| --- | --- | --- | --- | --- | --- |
+|  ice40 hx4k | yosys+nextpnr | 0.79s | 0.08s |  blink.v rio.v | rio.bin |
+|  xc7a35ticsg324-1l | vivado | 80.59s | 4.73s |  blink.v rio.v | build/rio.bit |
+|  LCMXO2-7000HC-5TG144C | quartus | 8.91s | 0.40s |  blink.v rio.v | build/rio_build.bit |
+|  ecp5 25k | yosys+nextpnr | 1.54s | 0.14s |  pll.v blink.v rio.v | rio.bit |
+|  ecp5 25k | yosys+nextpnr | 1.50s | 0.14s |  pll.v blink.v rio.v | rio.bit |
+|  "Cyclone IV E" EP4CE6E22C8 | quartus | 22.86s | 2.64s |  blink.v rio.v | rio.sof |
+|  ice40 up5k | yosys+nextpnr | 0.76s | 0.08s |  pll.v blink.v rio.v | rio.bin |
+|  ice40 hx8k | yosys+nextpnr | 0.76s | 0.09s |  pll.v blink.v rio.v | rio.bin |
+|  ice40 hx8k | yosys+nextpnr | 0.76s | 0.08s |  blink.v rio.v | rio.bin |
+|  GW2AR-18C GW2AR-LV18QN88C8/I7 | gowin | 9.07s | 0.22s |  blink.v rio.v | impl/pnr/project.fs |
+|  GW1N-9C GW1NR-LV9QN88PC6/I5 | yosys+nextpnr | 12.71s | 0.73s |  blink.v rio.v | rio.fs |
+|  GW2A-18C GW2A-LV18PG256C8/I7 | yosys+nextpnr | 27.36s | 1.60s |  blink.v rio.v | rio.fs |
+|  ice40 lp8k | yosys+nextpnr | 0.82s | 0.10s |  pll.v blink.v rio.v | rio.bin |
+|  xc3s250e-4-vq100 | ise/webpack | 18.50s | 0.43s |  blink.v rio.v | rio.bit |
