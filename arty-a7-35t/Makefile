@@ -1,4 +1,6 @@
 
+# vivado
+
 PROJECT  := rio
 TOP      := rio
 PART     := xc7a35ticsg324-1l

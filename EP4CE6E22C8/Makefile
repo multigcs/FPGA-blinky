@@ -1,4 +1,6 @@
 
+# quartus
+
 PROJECT  := rio
 TOP      := rio
 PART      := EP4CE6E22C8

@@ -1,4 +1,6 @@
 
+# ise/webpack
+
 PROJECT  := rio
 TOP      := rio
 PART     := xc3s250e-4-vq100
@@ -29,9 +31,5 @@ clean:
 	rm -rf $(PROJECT)_bitgen.xwbt $(PROJECT)_map.xrpt $(PROJECT)_ngdbuild.xrpt $(PROJECT)_par.xrpt $(PROJECT)_summary.xml $(PROJECT)_usage.xml usage_statistics_webtalk.html webtalk.log
 	rm -rf $(PROJECT).drc $(PROJECT).map $(PROJECT).mrp $(PROJECT).ngm $(PROJECT).ngc_xst.xrpt $(PROJECT).pcf xst/ xlnx_auto_0_xdb/
 
-
 load: $(PROJECT).bit
 	openFPGALoader -v -c usb-blaster $(PROJECT).bit
-
-
-

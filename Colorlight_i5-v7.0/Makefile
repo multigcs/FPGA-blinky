@@ -1,4 +1,6 @@
 
+# yosys+nextpnr
+
 PROJECT  := rio
 TOP      := rio
 FAMILY   := ecp5

@@ -1,4 +1,6 @@
 
+# gowin
+
 PROJECT  := rio
 TOP      := rio
 FAMILY   := GW2AR-18C

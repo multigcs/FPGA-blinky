@@ -1,4 +1,6 @@
 
+# gowin or yosys+nextpnr
+
 PROJECT  := rio
 TOP      := rio
 FAMILY   := GW1N-9C
