@@ -23,13 +23,7 @@ $(PROJECT).bit: $(PROJECT).config
 $(PROJECT).svf: $(PROJECT).bit
 
 clean:
-	rm -rf $(PROJECT).bit $(PROJECT).svf $(PROJECT).config $(PROJECT).json yosys.log nextpnr.log
-
-check:
-	verilator --top-module $(PROJECT) --lint-only -Wall *.v
-
-sim: $(VERILOGS)
-	verilator --cc --exe --build -j 0 -Wall --top-module $(PROJECT) sim_main.cpp $(VERILOGS)
+	rm -rf $(PROJECT).bit $(PROJECT).svf $(PROJECT).config $(PROJECT).json yosys.log nextpnr.log abc.history
 
 tinyprog: $(PROJECT).bit
 	tinyprog -p $(PROJECT).bit

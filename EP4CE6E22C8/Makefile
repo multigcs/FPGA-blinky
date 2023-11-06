@@ -70,7 +70,7 @@ asm.chg:
 clean:
 	$(Q)$(ECHO) "Cleaning."
 	rm -rf db incremental_db
-	rm -f smart.log *.rpt *.sof *.chg *.qsf *.qpf *.summary *.smsg *.pin *.jdi
+	rm -f smart.log *.rpt *.sof *.chg *.qsf *.qpf *.summary *.smsg *.pin *.jdi *.sld
 
 load: prog
 prog: $(PROJECT).sof

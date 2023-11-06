@@ -23,7 +23,7 @@ $(PROJECT).bit: $(PROJECT).config
 $(PROJECT).svf: $(PROJECT).bit
 
 clean:
-	rm -rf $(PROJECT).bit $(PROJECT).svf $(PROJECT).config $(PROJECT).json yosys.log nextpnr.log
+	rm -rf $(PROJECT).bit $(PROJECT).svf $(PROJECT).config $(PROJECT).json yosys.log nextpnr.log abc.history
 
 tinyprog: $(PROJECT).bit
 	tinyprog -p $(PROJECT).bit

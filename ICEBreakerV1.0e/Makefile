@@ -21,7 +21,7 @@ $(PROJECT).bin: $(PROJECT).asc
 	icepack $(PROJECT).asc $(PROJECT).bin
 
 clean:
-	rm -rf $(PROJECT).bin $(PROJECT).asc $(PROJECT).json yosys.log nextpnr.log
+	rm -rf $(PROJECT).bin $(PROJECT).asc $(PROJECT).json yosys.log nextpnr.log abc.history
 
 tinyprog: $(PROJECT).bin
 	tinyprog -p $(PROJECT).bin

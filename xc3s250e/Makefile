@@ -25,8 +25,13 @@ $(PROJECT).bit: parout.ncd $(PROJECT).pcf
 	bitgen -w -g StartUpClk:CClk -g CRC:Enable parout.ncd $(PROJECT).bit $(PROJECT).pcf
 
 clean:
-	rm -rf $(PROJECT).ngc $(PROJECT).ngd $(PROJECT).ncd parout.ncd $(PROJECT).bit
+	rm -rf $(PROJECT).ngc $(PROJECT).ngd $(PROJECT).ncd parout.ncd $(PROJECT).bit _xmsgs/ netlist.lst parout.* parout_pad.* $(PROJECT)-modules.v $(PROJECT).pcf $(PROJECT).bgn $(PROJECT).bld
+	rm -rf $(PROJECT)_bitgen.xwbt $(PROJECT)_map.xrpt $(PROJECT)_ngdbuild.xrpt $(PROJECT)_par.xrpt $(PROJECT)_summary.xml $(PROJECT)_usage.xml usage_statistics_webtalk.html webtalk.log
+	rm -rf $(PROJECT).drc $(PROJECT).map $(PROJECT).mrp $(PROJECT).ngm $(PROJECT).ngc_xst.xrpt $(PROJECT).pcf xst/ xlnx_auto_0_xdb/
+
 
 load: $(PROJECT).bit
 	openFPGALoader -v -c usb-blaster $(PROJECT).bit
+
+
 

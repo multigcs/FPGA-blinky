@@ -30,4 +30,4 @@ build/$(PROJECT)_build.bit: $(PROJECT).ldf
 	diamondc syn.tcl
 
 clean:
-	rm -rf build $(PROJECT).ldf $(PROJECT).tcl syn.tcl
+	rm -rf build $(PROJECT).ldf $(PROJECT).tcl syn.tcl *.sty

@@ -21,13 +21,7 @@ $(PROJECT).bin: $(PROJECT).asc
 	icepack $(PROJECT).asc $(PROJECT).bin
 
 clean:
-	rm -rf $(PROJECT).bin $(PROJECT).asc $(PROJECT).json yosys.log nextpnr.log
-
-check:
-	verilator --top-module $(PROJECT) --lint-only -Wall *.v
-
-sim: $(VERILOGS)
-	verilator --cc --exe --build -j 0 -Wall --top-module $(PROJECT) sim_main.cpp $(VERILOGS)
+	rm -rf $(PROJECT).bin $(PROJECT).asc $(PROJECT).json *.log abc.history $(PROJECT).asc $(PROJECT).bin $(PROJECT).json
 
 tinyprog: $(PROJECT).bin
 	tinyprog -p $(PROJECT).bin
