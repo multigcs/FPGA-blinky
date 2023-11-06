@@ -1,6 +1,7 @@
 
 PROJECT = rio
 TOP = rio
+
 FAMILY=GW1N-9C
 FAMILY_GOWIN=GW1NR-9C
 DEVICE=GW1NR-LV9QN88PC6/I5
@@ -21,11 +22,6 @@ load: $(PROJECT).fs
 
 clean:
 	rm -rf $(PROJECT).fs $(PROJECT).json $(PROJECT)_pnr.json $(PROJECT).tcl abc.history impl yosys.log
-
-testb:
-	iverilog -Wall -o testb.out testb.v blink.v $(PROJECT).v
-	vvp testb.out
-	gtkwave testb.vcd
 
 gowin_build: impl/pnr/project.fs
 
