@@ -12,11 +12,21 @@ $(PROJECT).tcl: blink.v $(PROJECT).v
 	@echo "prj_project save" >> $(PROJECT).tcl
 	@echo "prj_project close" >> $(PROJECT).tcl
 
-$(PROJECT).ldf: $(PROJECT).tcl blink.v $(PROJECT).v
+syn.tcl: $(PROJECT).tcl
+	@echo "prj_project open $(PROJECT).ldf" >> syn.tcl
+	@echo "prj_run Synthesis -impl build" >> syn.tcl
+	@echo "prj_run Translate -impl build" >> syn.tcl
+	@echo "prj_run Map -impl build" >> syn.tcl
+	@echo "prj_run PAR -impl build" >> syn.tcl
+	@echo "prj_run PAR -impl build -task PARTrace" >> syn.tcl
+	@echo "prj_run Export -impl build -task Bitgen" >> syn.tcl
+	@echo "prj_project close" >> syn.tcl
+
+$(PROJECT).ldf: syn.tcl
 	diamondc $(PROJECT).tcl
 
 build/$(PROJECT)_build.bit: $(PROJECT).ldf
 	diamondc syn.tcl
 
 clean:
-	rm -rf build $(PROJECT).ldf $(PROJECT).tcl
+	rm -rf build $(PROJECT).ldf $(PROJECT).tcl syn.tcl
