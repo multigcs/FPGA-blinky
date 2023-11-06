@@ -1,34 +1,34 @@
 
-FAMILY  := ice40
-TYPE    := hx8k
-PACKAGE := ct256
+PROJECT  := rio
+TOP      := rio
+FAMILY   := ice40
+TYPE     := hx8k
+PACKAGE  := ct256
+VERILOGS := blink.v rio.v
 
-all: rio.bin
+all: $(PROJECT).bin
 
-rio.json: blink.v rio.v
-	yosys -q -l yosys.log -p 'synth_${FAMILY} -top rio -json rio.json' blink.v rio.v
+$(PROJECT).json: $(VERILOGS)
+	yosys -q -l yosys.log -p 'synth_${FAMILY} -top $(TOP) -json $(PROJECT).json' $(VERILOGS)
 
-rio.asc: rio.json pins.pcf
-	nextpnr-${FAMILY} -q -l nextpnr.log --${TYPE} --package ${PACKAGE} --json rio.json --pcf pins.pcf --asc rio.asc
+$(PROJECT).asc: $(PROJECT).json pins.pcf
+	nextpnr-${FAMILY} -q -l nextpnr.log --${TYPE} --package ${PACKAGE} --json $(PROJECT).json --pcf pins.pcf --asc $(PROJECT).asc
 	@echo ""
 	@grep -B 1 "%$$" nextpnr.log
 	@echo ""
 
-rio.bin: rio.asc
-	icepack rio.asc rio.bin
+$(PROJECT).bin: $(PROJECT).asc
+	icepack $(PROJECT).asc $(PROJECT).bin
 
 clean:
-	rm -rf rio.bin rio.asc rio.json yosys.log nextpnr.log
+	rm -rf $(PROJECT).bin $(PROJECT).asc $(PROJECT).json yosys.log nextpnr.log
 
 check:
-	verilator --top-module rio --lint-only -Wall *.v
+	verilator --top-module $(PROJECT) --lint-only -Wall *.v
 
-sim: blink.v rio.v
-	verilator --cc --exe --build -j 0 -Wall --top-module rio sim_main.cpp blink.v rio.v
+tinyprog: $(PROJECT).bin
+	tinyprog -p $(PROJECT).bin
 
-tinyprog: rio.bin
-	tinyprog -p rio.bin
-
-load: rio.bin
-	 openFPGALoader -b ice40_generic rio.bin
+load: $(PROJECT).bin
+	 openFPGALoader -b ice40_generic $(PROJECT).bin
 

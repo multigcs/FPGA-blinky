@@ -1,14 +1,14 @@
 
-PROJECT = rio
-TOP = rio
-
-FAMILY=GW2A-18C
-DEVICE=GW2A-LV18PG256C8/I7
+PROJECT  := rio
+TOP      := rio
+FAMILY   := GW2A-18C
+DEVICE   := GW2A-LV18PG256C8/I7
+VERILOGS := blink.v rio.v
 
 all: $(PROJECT).fs
 
-$(PROJECT).json: blink.v $(PROJECT).v
-	yosys -q -l yosys.log -p 'synth_gowin -noalu -nowidelut -top $(PROJECT) -json $(PROJECT).json' blink.v $(PROJECT).v
+$(PROJECT).json: $(VERILOGS)
+	yosys -q -l yosys.log -p 'synth_gowin -noalu -nowidelut -top $(PROJECT) -json $(PROJECT).json' $(VERILOGS)
 
 $(PROJECT)_pnr.json: $(PROJECT).json pins.cst
 	nextpnr-gowin --seed 0 --json $(PROJECT).json --write $(PROJECT)_pnr.json --freq 27.0 --enable-globals --enable-auto-longwires --device ${DEVICE} --cst pins.cst
@@ -25,7 +25,7 @@ clean:
 
 gowin_build: impl/pnr/project.fs
 
-$(PROJECT).tcl: pins.cst blink.v $(PROJECT).v
+$(PROJECT).tcl: pins.cst $(VERILOGS)
 	@echo "set_device -name $(FAMILY) $(DEVICE)" > $(PROJECT).tcl
 	@for VAR in $?; do echo $$VAR | grep -s -q "\.v$$" && echo "add_file $$VAR" >> $(PROJECT).tcl; done
 	@echo "add_file pins.cst" >> $(PROJECT).tcl

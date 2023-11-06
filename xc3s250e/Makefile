@@ -1,27 +1,32 @@
 
-all: rio.bit
+PROJECT  := rio
+TOP      := rio
+PART     := xc3s250e-4-vq100
+VERILOGS := blink.v rio.v
 
-rio-modules.v: blink.v rio.v
-	cat blink.v rio.v > rio-modules.v
+all: $(PROJECT).bit
 
-rio.ngc: rio-modules.v
-	echo 'run -ifn rio-modules.v -ifmt Verilog -ofn rio.ngc -top rio -p xc3s250e-4-vq100 -opt_mode Speed -opt_level 1' | xst
+$(PROJECT)-modules.v: $(VERILOGS)
+	cat $(VERILOGS) > $(PROJECT)-modules.v
 
-rio.ngd: rio.ngc pins.ucf
-	ngdbuild -p xc3s250e-4-vq100 -uc pins.ucf rio.ngc
+$(PROJECT).ngc: $(PROJECT)-modules.v
+	echo 'run -ifn $(PROJECT)-modules.v -ifmt Verilog -ofn $(PROJECT).ngc -top $(TOP) -p $(PART) -opt_mode Speed -opt_level 1' | xst
 
-rio.ncd: rio.ngd
-	map -detail -pr b rio.ngd
+$(PROJECT).ngd: $(PROJECT).ngc pins.ucf
+	ngdbuild -p $(PART) -uc pins.ucf $(PROJECT).ngc
 
-parout.ncd: rio.ncd rio.pcf
-	par -w rio.ncd parout.ncd rio.pcf
+$(PROJECT).ncd: $(PROJECT).ngd
+	map -detail -pr b $(PROJECT).ngd
 
-rio.bit: parout.ncd rio.pcf
-	bitgen -w -g StartUpClk:CClk -g CRC:Enable parout.ncd rio.bit rio.pcf
+parout.ncd: $(PROJECT).ncd $(PROJECT).pcf
+	par -w $(PROJECT).ncd parout.ncd $(PROJECT).pcf
+
+$(PROJECT).bit: parout.ncd $(PROJECT).pcf
+	bitgen -w -g StartUpClk:CClk -g CRC:Enable parout.ncd $(PROJECT).bit $(PROJECT).pcf
 
 clean:
-	rm -rf rio.ngc rio.ngd rio.ncd parout.ncd rio.bit
+	rm -rf $(PROJECT).ngc $(PROJECT).ngd $(PROJECT).ncd parout.ncd $(PROJECT).bit
 
-load: rio.bit
-	openFPGALoader -v -c usb-blaster rio.bit
+load: $(PROJECT).bit
+	openFPGALoader -v -c usb-blaster $(PROJECT).bit
 

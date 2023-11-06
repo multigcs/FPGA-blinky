@@ -1,9 +1,9 @@
 
-PRODUCT   = rio
-PART      = EP4CE6E22C8
-FAMILY    = "Cyclone IV E"
-BOARDFILE = pins.qdf
-MOD       = rio
+PROJECT  := rio
+TOP      := rio
+PART      := EP4CE6E22C8
+FAMILY    := "Cyclone IV E"
+VERILOGS  := blink.v rio.v
 
 QC   = quartus_sh
 QP   = quartus_pgm
@@ -18,46 +18,45 @@ STAMP = echo done >
 
 QCFLAGS = --flow compile
 QPFLAGS =
-QMFLAGS = --read_settings_files=on $(addprefix --source=,$(SRCS))
+QMFLAGS = --read_settings_files=on $(addprefix --source=,$(VERILOGS))
 QFFLAGS = --part=$(PART) --read_settings_files=on
 
-SRCS = blink.v rio.v
-ASIGN = $(PRODUCT).qsf $(PRODUCT).qpf
+ASIGN = $(PROJECT).qsf $(PROJECT).qpf
 
-all: $(PRODUCT)
+all: $(PROJECT)
 
-map: smart.log $(PRODUCT).map.rpt
-fit: smart.log $(PRODUCT).fit.rpt
-asm: smart.log $(PRODUCT).asm.rpt
-sta: smart.log $(PRODUCT).sta.rpt
+map: smart.log $(PROJECT).map.rpt
+fit: smart.log $(PROJECT).fit.rpt
+asm: smart.log $(PROJECT).asm.rpt
+sta: smart.log $(PROJECT).sta.rpt
 smart: smart.log
 
 $(ASIGN):
 	$(Q)$(ECHO) "Generating asignment files."
-	$(QC) --prepare -f $(FAMILY) -t $(MOD) $(PRODUCT)
-	echo >> $(PRODUCT).qsf
-	cat $(BOARDFILE) >> $(PRODUCT).qsf
+	$(QC) --prepare -f $(FAMILY) -t $(TOP) $(PROJECT)
+	echo >> $(PROJECT).qsf
+	cat pins.qdf >> $(PROJECT).qsf
 
 smart.log: $(ASIGN)
 	$(Q)$(ECHO) "Generating smart.log."
-	$(QC) --determine_smart_action $(PRODUCT) > smart.log
+	$(QC) --determine_smart_action $(PROJECT) > smart.log
 
-$(PRODUCT): smart.log $(PRODUCT).asm.rpt $(PRODUCT).sta.rpt
+$(PROJECT): smart.log $(PROJECT).asm.rpt $(PROJECT).sta.rpt
 
-$(PRODUCT).map.rpt: map.chg $(SRCS)
-	$(QM) $(QMFLAGS) $(PRODUCT)
+$(PROJECT).map.rpt: map.chg $(VERILOGS)
+	$(QM) $(QMFLAGS) $(PROJECT)
 	$(STAMP) fit.chg
 
-$(PRODUCT).fit.rpt: fit.chg $(PRODUCT).map.rpt
-	$(QF) $(QFFLAGS) $(PRODUCT)
+$(PROJECT).fit.rpt: fit.chg $(PROJECT).map.rpt
+	$(QF) $(QFFLAGS) $(PROJECT)
 	$(STAMP) asm.chg
 	$(STAMP) sta.chg
 
-$(PRODUCT).asm.rpt: asm.chg $(PRODUCT).fit.rpt
-	$(QA) $(PRODUCT)
+$(PROJECT).asm.rpt: asm.chg $(PROJECT).fit.rpt
+	$(QA) $(PROJECT)
 
-$(PRODUCT).sta.rpt: sta.chg $(PRODUCT).fit.rpt
-	$(QS) $(PRODUCT)
+$(PROJECT).sta.rpt: sta.chg $(PROJECT).fit.rpt
+	$(QS) $(PROJECT)
 
 map.chg:
 	$(STAMP) map.chg
@@ -74,7 +73,7 @@ clean:
 	rm -f smart.log *.rpt *.sof *.chg *.qsf *.qpf *.summary *.smsg *.pin *.jdi
 
 load: prog
-prog: $(PRODUCT).sof
+prog: $(PROJECT).sof
 	$(Q)$(ECHO) "Programming."
-	$(QP) --no_banner --mode=jtag -o "P;$(PRODUCT).sof"
+	$(QP) --no_banner --mode=jtag -o "P;$(PROJECT).sof"
 

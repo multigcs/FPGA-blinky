@@ -17,10 +17,13 @@ do
     )
 done
 
+echo ""
+echo "--------------------------------------------------------------------"
+echo ""
 for F in `ls -d */`
 do
     echo "######### $F #########"
-    if ! find "$F" | grep "rio.bit$\|rio.bin$\|project.fs$\|rio.fs$\|rio.sof$"
+    if ! find "$F" | grep "rio.bit$\|rio.bin$\|project.fs$\|rio.fs$\|rio.sof$\|rio_build.bit$"
     then
         echo ""
         echo "#### FAILED ####"

@@ -1,9 +1,9 @@
 
-PROJECT = rio
-TOP = rio
-
-FAMILY=GW2AR-18C
-DEVICE=GW2AR-LV18QN88C8/I7
+PROJECT  := rio
+TOP      := rio
+FAMILY   := GW2AR-18C
+DEVICE   := GW2AR-LV18QN88C8/I7
+VERILOGS := blink.v rio.v
 
 all: impl/pnr/project.fs
 
@@ -14,7 +14,7 @@ load: gowin_load
 
 gowin_build: impl/pnr/project.fs
 
-$(PROJECT).tcl: pins.cst blink.v $(PROJECT).v
+$(PROJECT).tcl: pins.cst $(VERILOGS)
 	@echo "set_device -name $(FAMILY) $(DEVICE)" > $(PROJECT).tcl
 	@for VAR in $?; do echo $$VAR | grep -s -q "\.v$$" && echo "add_file $$VAR" >> $(PROJECT).tcl; done
 	@echo "add_file pins.cst" >> $(PROJECT).tcl
@@ -29,7 +29,7 @@ $(PROJECT).tcl: pins.cst blink.v $(PROJECT).v
 	@echo "set_option -use_i2c_as_gpio 1" >> $(PROJECT).tcl
 	@echo "run all" >> $(PROJECT).tcl
 
-impl/pnr/project.fs: $(PROJECT).tcl pins.cst blink.v $(PROJECT).v
+impl/pnr/project.fs: $(PROJECT).tcl
 	gw_sh $(PROJECT).tcl
 
 gowin_load: impl/pnr/project.fs

@@ -1,12 +1,13 @@
 
-PROJECT = rio
-TOP = rio
-PART = xc7a35ticsg324-1l
+PROJECT  := rio
+TOP      := rio
+PART     := xc7a35ticsg324-1l
+VERILOGS := blink.v rio.v
 
 all: build/$(PROJECT).bit
 
 
-$(PROJECT).tcl: pins.xdc blink.v $(PROJECT).v
+$(PROJECT).tcl: pins.xdc $(VERILOGS)
 	@echo "set outputDir ./build" > $(PROJECT).tcl
 	@echo "file mkdir \$$outputDir" >> $(PROJECT).tcl
 	@echo "" >> $(PROJECT).tcl
