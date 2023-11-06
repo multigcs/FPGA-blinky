@@ -29,6 +29,7 @@ with an minimal configuration (blinking LED)
 * ISE/Webpack
 * quartus
 * Vivado
+* Diamond
 
 
 ## quick-start
