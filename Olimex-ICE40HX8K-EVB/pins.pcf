@@ -1,0 +1,5 @@
+### main ###
+set_io  -pullup yes sysclk J3
+
+### blink ###
+set_io  BLINK_LED R16

@@ -1,0 +1,8 @@
+// ### main ###
+IO_LOC "sysclk" 4;
+IO_PORT "sysclk" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+// ### blink ###
+IO_LOC "BLINK_LED" 15;
+IO_PORT "BLINK_LED" IO_TYPE=LVCMOS33;
+
