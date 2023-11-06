@@ -5,9 +5,6 @@
     <Version>5</Version>
     <Device name="" pn="">gw2a18c-011</Device>
     <FileList>
-        <File path="quad_encoder.v" type="file.verilog" enable="1"/>
-        <File path="joint_stepper.v" type="file.verilog" enable="1"/>
-        <File path="joint_stepper_nf.v" type="file.verilog" enable="1"/>
         <File path="debouncer.v" type="file.verilog" enable="1"/>
         <File path="blink.v" type="file.verilog" enable="1"/>
         <File path="rio.v" type="file.verilog" enable="1"/>

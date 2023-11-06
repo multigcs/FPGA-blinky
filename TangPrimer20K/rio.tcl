@@ -1,7 +1,4 @@
 set_device -name GW2A-18C GW2A-LV18PG256C8/I7
-add_file quad_encoder.v
-add_file joint_stepper.v
-add_file joint_stepper_nf.v
 add_file debouncer.v
 add_file blink.v
 add_file rio.v
