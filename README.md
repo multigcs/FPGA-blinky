@@ -8,17 +8,19 @@ with an minimal configuration (blinking LED)
 
 ## Boards:
 
-* Alhambra-II
-* Colorlight5A-75E
-* ICEBreakerV1.0e
-* TangNano20K
-* TangPrimer20K
-* arty-a7-35t
-* Colorlight_i5-v7.0
-* Lattice-ICE40HX8K
-* Olimex-ICE40HX8K-EVB
-* TangNano9K
-* TinyFPGA-BX
+* Alhambra-II (ice40hx4k)
+* ICEBreakerV1.0e (ice40up5k)
+* TangNano20K (GW2AR-LV18QN88C8/I7)
+* TangPrimer20K (GW2A-LV18PG256C8/I7)
+* arty-a7-35t (xc7a35ticsg324-1l)
+* Colorlight5A-75E (ecp5-25K)
+* Colorlight_i5-v7.0 (ecp5-25K)
+* Lattice-ICE40HX8K (ICE40HX8K)
+* Olimex-ICE40HX8K-EVB (ICE40HX8K)
+* TangNano9K (GW1NR-LV9QN88PC6/I5)
+* TinyFPGA-BX (ice40lp8k)
+* Cyclone IV FPGA EP4CE6E22C8N Development Board USB V2 (EP4CE6E22C8N / Cyclone IV)
+* Open Bench Logic Sniffer (xc3s250e / Spartan-3E)
 
 ## Toolchains:
 
@@ -27,5 +29,25 @@ with an minimal configuration (blinking LED)
 * ISE/Webpack
 * quartus
 * Vivado
+
+
+## quick-start
+add the toolchain to your system PATH,
+in my case:
+
+```
+export PATH=$PATH:/opt/oss-cad-suite/bin/
+export PATH=$PATH:/opt/Xilinx/Vivado/2023.1/bin/
+export PATH=$PATH:/opt/gowin/IDE/bin/
+export PATH=$PATH:/opt/intelFPGA_lite/22.1std/quartus/bin/
+export PATH=$PATH:/opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/
+```
+
+go into the target directory and run make:
+
+```
+cd EP4CE6E22C8/
+make
+```
 
 
