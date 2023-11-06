@@ -2,7 +2,6 @@
 set outputDir ./build
 file mkdir $outputDir
 
-read_verilog debouncer.v
 read_verilog blink.v
 read_verilog rio.v
 read_xdc pins.xdc

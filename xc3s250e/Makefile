@@ -1,8 +1,8 @@
 
 all: rio.bit
 
-rio-modules.v: debouncer.v blink.v rio.v
-	cat debouncer.v blink.v rio.v > rio-modules.v
+rio-modules.v: blink.v rio.v
+	cat blink.v rio.v > rio-modules.v
 
 rio.ngc: rio-modules.v
 	echo 'run -ifn rio-modules.v -ifmt Verilog -ofn rio.ngc -top rio -p xc3s250e-4-vq100 -opt_mode Speed -opt_level 1' | xst

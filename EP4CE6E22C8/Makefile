@@ -21,7 +21,7 @@ QPFLAGS =
 QMFLAGS = --read_settings_files=on $(addprefix --source=,$(SRCS))
 QFFLAGS = --part=$(PART) --read_settings_files=on
 
-SRCS = debouncer.v blink.v rio.v
+SRCS = blink.v rio.v
 ASIGN = $(PRODUCT).qsf $(PRODUCT).qpf
 
 all: $(PRODUCT)

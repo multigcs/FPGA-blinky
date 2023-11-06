@@ -11,7 +11,7 @@ load: gowin_load
 
 gowin_build: impl/pnr/project.fs
 
-impl/pnr/project.fs: rio.tcl pins.cst debouncer.v blink.v rio.v
+impl/pnr/project.fs: rio.tcl pins.cst blink.v rio.v
 	gw_sh rio.tcl
 
 gowin_load: impl/pnr/project.fs

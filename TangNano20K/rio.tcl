@@ -1,5 +1,4 @@
 set_device -name GW2AR-18C GW2AR-LV18QN88C8/I7
-add_file debouncer.v
 add_file blink.v
 add_file rio.v
 add_file pins.cst

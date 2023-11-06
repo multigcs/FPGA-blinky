@@ -5,8 +5,8 @@ PACKAGE := sg48
 
 all: rio.bin
 
-rio.json: debouncer.v pll.v blink.v rio.v
-	yosys -q -l yosys.log -p 'synth_${FAMILY} -dsp -top rio -json rio.json' debouncer.v pll.v blink.v rio.v
+rio.json: pll.v blink.v rio.v
+	yosys -q -l yosys.log -p 'synth_${FAMILY} -dsp -top rio -json rio.json' pll.v blink.v rio.v
 
 rio.asc: rio.json pins.pcf
 	nextpnr-${FAMILY} -q -l nextpnr.log --${TYPE} --package ${PACKAGE} --json rio.json --pcf pins.pcf --asc rio.asc
@@ -23,8 +23,8 @@ clean:
 check:
 	verilator --top-module rio --lint-only -Wall *.v
 
-sim: debouncer.v pll.v blink.v rio.v
-	verilator --cc --exe --build -j 0 -Wall --top-module rio sim_main.cpp debouncer.v pll.v blink.v rio.v
+sim: pll.v blink.v rio.v
+	verilator --cc --exe --build -j 0 -Wall --top-module rio sim_main.cpp pll.v blink.v rio.v
 
 tinyprog: rio.bin
 	tinyprog -p rio.bin

@@ -5,7 +5,6 @@
     <Version>5</Version>
     <Device name="" pn="">gw2a18c-011</Device>
     <FileList>
-        <File path="debouncer.v" type="file.verilog" enable="1"/>
         <File path="blink.v" type="file.verilog" enable="1"/>
         <File path="rio.v" type="file.verilog" enable="1"/>
     <File path="pins.cst" type="file.cst" enable="1"/>

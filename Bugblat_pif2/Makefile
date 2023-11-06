@@ -1,7 +1,7 @@
 
 all: build/rio_build.bit
 
-rio.ldf: rio.tcl debouncer.v blink.v rio.v
+rio.ldf: rio.tcl blink.v rio.v
 	diamondc rio.tcl
 
 build/rio_build.bit: rio.ldf
