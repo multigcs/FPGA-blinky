@@ -1,34 +1,51 @@
 
+PROJECT = rio
+TOP = rio
 FAMILY=GW1N-9C
+FAMILY_GOWIN=GW1NR-9C
 DEVICE=GW1NR-LV9QN88PC6/I5
 
-all: rio.fs
+all: $(PROJECT).fs
 
-rio.json: blink.v rio.v
-	yosys -q -l yosys.log -p 'synth_gowin -noalu -nowidelut -top rio -json rio.json' blink.v rio.v
+$(PROJECT).json: blink.v $(PROJECT).v
+	yosys -q -l yosys.log -p 'synth_gowin -noalu -nowidelut -top $(PROJECT) -json $(PROJECT).json' blink.v $(PROJECT).v
 
-rio_pnr.json: rio.json pins.cst
-	nextpnr-gowin --seed 0 --json rio.json --write rio_pnr.json --freq 27.0 --enable-globals --enable-auto-longwires --device ${DEVICE} --cst pins.cst
+$(PROJECT)_pnr.json: $(PROJECT).json pins.cst
+	nextpnr-gowin --seed 0 --json $(PROJECT).json --write $(PROJECT)_pnr.json --freq 27.0 --enable-globals --enable-auto-longwires --device ${DEVICE} --cst pins.cst
 
-rio.fs: rio_pnr.json
-	gowin_pack -d ${FAMILY} -o rio.fs rio_pnr.json
+$(PROJECT).fs: $(PROJECT)_pnr.json
+	gowin_pack -d ${FAMILY} -o $(PROJECT).fs $(PROJECT)_pnr.json
 
-load: rio.fs
-	openFPGALoader -b tangnano9k rio.fs -f
-
+load: $(PROJECT).fs
+	openFPGALoader -b tangnano9k $(PROJECT).fs -f
 
 clean:
-	rm -rf rio.fs rio.json rio_pnr.json
+	rm -rf $(PROJECT).fs $(PROJECT).json $(PROJECT)_pnr.json $(PROJECT).tcl abc.history impl yosys.log
 
 testb:
-	iverilog -Wall -o testb.out testb.v blink.v rio.v
+	iverilog -Wall -o testb.out testb.v blink.v $(PROJECT).v
 	vvp testb.out
 	gtkwave testb.vcd
 
 gowin_build: impl/pnr/project.fs
 
-impl/pnr/project.fs: rio.tcl pins.cst blink.v rio.v
-	gw_sh rio.tcl
+$(PROJECT).tcl: pins.cst blink.v $(PROJECT).v
+	@echo "set_device -name $(FAMILY_GOWIN) $(DEVICE)" > $(PROJECT).tcl
+	@for VAR in $?; do echo $$VAR | grep -s -q "\.v$$" && echo "add_file $$VAR" >> $(PROJECT).tcl; done
+	@echo "add_file pins.cst" >> $(PROJECT).tcl
+	@echo "set_option -top_module $(TOP)" >> $(PROJECT).tcl
+	@echo "set_option -verilog_std v2001" >> $(PROJECT).tcl
+	@echo "set_option -vhdl_std vhd2008" >> $(PROJECT).tcl
+	@echo "set_option -use_sspi_as_gpio 1" >> $(PROJECT).tcl
+	@echo "set_option -use_mspi_as_gpio 1" >> $(PROJECT).tcl
+	@echo "set_option -use_done_as_gpio 1" >> $(PROJECT).tcl
+	@echo "set_option -use_ready_as_gpio 1" >> $(PROJECT).tcl
+	@echo "set_option -use_reconfign_as_gpio 1" >> $(PROJECT).tcl
+	@echo "set_option -use_i2c_as_gpio 1" >> $(PROJECT).tcl
+	@echo "run all" >> $(PROJECT).tcl
+
+impl/pnr/project.fs: $(PROJECT).tcl
+	gw_sh $(PROJECT).tcl
 
 gowin_load: impl/pnr/project.fs
 	openFPGALoader -b tangnano9k impl/pnr/project.fs -f
