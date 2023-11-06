@@ -42,6 +42,7 @@ export PATH=$PATH:/opt/Xilinx/Vivado/2023.1/bin/
 export PATH=$PATH:/opt/gowin/IDE/bin/
 export PATH=$PATH:/opt/intelFPGA_lite/22.1std/quartus/bin/
 export PATH=$PATH:/opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/
+export PATH=$PATH:/opt/diamond/3.12/bin/lin64/
 ```
 
 go into the target directory and run make:
