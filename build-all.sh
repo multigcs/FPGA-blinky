@@ -8,7 +8,16 @@ do
     echo "######### $F #########"
     (
         cd  $F
-        if ! make all
+        make clean
+    )
+done
+
+for F in `ls -d */`
+do
+    echo "######### $F #########"
+    (
+        cd  $F
+        if ! /usr/bin/time -o time.log make all
         then
             echo ""
             echo "#### build failed: $F"
