@@ -1,5 +1,4 @@
 set_device -name GW1NR-9C GW1NR-LV9QN88PC6/I5
-add_file expansion_shiftreg.v
 add_file debouncer.v
 add_file blink.v
 add_file rio.v

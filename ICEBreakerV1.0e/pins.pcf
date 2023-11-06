@@ -4,8 +4,3 @@ set_io  -pullup yes sysclk_in 35
 ### blink ###
 set_io  BLINK_LED 37
 
-### expansion_shiftreg ###
-set_io  EXPANSION0_SHIFTREG_CLOCK 20
-set_io  EXPANSION0_SHIFTREG_LOAD 18
-set_io  EXPANSION0_SHIFTREG_OUT 26
-set_io  -pullup yes EXPANSION0_SHIFTREG_IN 23
