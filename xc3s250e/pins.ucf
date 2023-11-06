@@ -1,0 +1,5 @@
+### main ###
+NET "sysclk"       LOC = "P41" ;
+
+### blink ###
+NET "BLINK_LED"       LOC = "P36" ;

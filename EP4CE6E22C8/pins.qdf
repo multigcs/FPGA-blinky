@@ -1,0 +1,7 @@
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+### main ###
+set_location_assignment PIN_24 -to sysclk
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to sysclk
+
+### blink ###
+set_location_assignment PIN_3 -to BLINK_LED

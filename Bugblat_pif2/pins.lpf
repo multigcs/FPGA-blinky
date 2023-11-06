@@ -1,0 +1,8 @@
+### main ###
+LOCATE COMP "sysclk"           SITE "0";
+IOBUF PORT "sysclk" IO_TYPE=LVCMOS33;
+
+### blink ###
+LOCATE COMP "BLINK_LED"           SITE "113";
+IOBUF PORT "BLINK_LED" IO_TYPE=LVCMOS33;
+
