@@ -2,10 +2,6 @@
 set outputDir ./build
 file mkdir $outputDir
 
-read_verilog interface_spislave.v
-read_verilog quad_encoder.v
-read_verilog joint_stepper.v
-read_verilog joint_stepper_nf.v
 read_verilog debouncer.v
 read_verilog blink.v
 read_verilog rio.v

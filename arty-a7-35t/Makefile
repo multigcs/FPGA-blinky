@@ -1,7 +1,7 @@
 
 all: build/rio.bit
 
-build/rio.bit: rio.tcl pins.xdc interface_spislave.v quad_encoder.v joint_stepper.v joint_stepper_nf.v debouncer.v blink.v rio.v
+build/rio.bit: rio.tcl pins.xdc debouncer.v blink.v rio.v
 	vivado -mode batch -source rio.tcl
 
 clean:
