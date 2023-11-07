@@ -1,4 +1,5 @@
 
+# Cyclone IV FPGA EP4CE6E22C8N Development Board USB V2
 # quartus
 
 PROJECT  := rio

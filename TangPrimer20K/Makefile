@@ -1,4 +1,5 @@
 
+# TangPrimer20K
 # gowin or yosys+nextpnr
 
 PROJECT  := rio

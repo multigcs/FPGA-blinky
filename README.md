@@ -21,6 +21,7 @@ with an minimal configuration (blinking LED)
 * TinyFPGA-BX (ice40lp8k)
 * Cyclone IV FPGA EP4CE6E22C8N Development Board USB V2 (EP4CE6E22C8N / Cyclone IV)
 * Open Bench Logic Sniffer (xc3s250e / Spartan-3E)
+* Bugblat PIF_2 (LCMXO2-7000HC-5TG144C)
 
 ## Toolchains:
 

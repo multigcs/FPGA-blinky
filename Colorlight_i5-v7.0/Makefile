@@ -1,4 +1,5 @@
 
+# Colorlight_i5-v7.0
 # yosys+nextpnr
 
 PROJECT  := rio

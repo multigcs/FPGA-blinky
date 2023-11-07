@@ -1,4 +1,5 @@
 
+# TangNano9K
 # gowin or yosys+nextpnr
 
 PROJECT  := rio

@@ -1,4 +1,5 @@
 
+# Colorlight5A-75E
 # yosys+nextpnr
 
 PROJECT  := rio

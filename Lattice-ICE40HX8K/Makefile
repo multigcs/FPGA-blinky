@@ -1,4 +1,5 @@
 
+# Lattice-ICE40HX8K
 # yosys+nextpnr
 
 PROJECT  := rio

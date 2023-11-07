@@ -1,4 +1,5 @@
 
+# Olimex-ICE40HX8K-EVB
 # yosys+nextpnr
 
 PROJECT  := rio
