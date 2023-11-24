@@ -24,6 +24,7 @@ syn.tcl: $(PROJECT).tcl
 	@echo "prj_run PAR -impl build" >> syn.tcl
 	@echo "prj_run PAR -impl build -task PARTrace" >> syn.tcl
 	@echo "prj_run Export -impl build -task Bitgen" >> syn.tcl
+	@echo "prj_run Export -impl build -task Jedecgen" >> syn.tcl
 	@echo "prj_project close" >> syn.tcl
 
 $(PROJECT).ldf: syn.tcl
@@ -34,3 +35,5 @@ build/$(PROJECT)_build.bit: $(PROJECT).ldf
 
 clean:
 	rm -rf build $(PROJECT).ldf $(PROJECT).tcl syn.tcl *.sty
+
+
