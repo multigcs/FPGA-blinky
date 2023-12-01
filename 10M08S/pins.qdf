@@ -1,0 +1,6 @@
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+### main ###
+set_location_assignment PIN_27 -to sysclk
+
+### blink ###
+set_location_assignment PIN_132 -to BLINK_LED
