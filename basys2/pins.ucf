@@ -1,0 +1,5 @@
+### main ###
+NET "sysclk"       LOC = "B8" ;
+
+### blink ###
+NET "BLINK_LED"       LOC = "G1" ;
